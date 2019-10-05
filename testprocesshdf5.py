@@ -56,6 +56,14 @@ def process():
 
     # Only keep data that corresponds to particles in the detector.
     df = g4sdf.loc[(g4sdf.volID==1)]
+    df = df.loc[(df.pid>1000390899)&(df.pid<1000400901)]
+    df = df.reset_index(drop=True)
+    print(df)
+    
+    for i in range(0,int(len(df)/2)):
+        deltaT = (df.loc[2*i+1,'t'] - df.loc[2*i,'t'])
+        print(deltaT)
+    exit()
 
     # Numba speeds up loops, but is only capatible with numpy, so convert df columns of interest into np arrays.
     event = df['event'].values

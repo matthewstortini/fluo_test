@@ -18,7 +18,7 @@
 
   <quantity name="foil_innerradius" type="length" value="0" unit="mm"/>
   <quantity name="foil_radius" type="length" value="31" unit="mm"/>
-  <quantity name="foil_height" type="length" value="1" unit="mm"/>
+  <quantity name="foil_height" type="length" value="0.01" unit="mm"/>
 
  </define>
 

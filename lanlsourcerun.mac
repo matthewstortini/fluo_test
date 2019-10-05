@@ -12,7 +12,7 @@
 
 ##Specify output file
 /g4simple/setOutputFormat hdf5
-/analysis/setFileName Ba_Gold_Sim
+/analysis/setFileName Y_Gold_Sim_1
 
 ##Set Volume ID's for Geometry Volumes (volume.in.geometry.file_PV volID)
 /g4simple/setVolID PPC_Germanium_Detector_PV 1
@@ -49,10 +49,11 @@
 #/gps/pos/centre 19.05 0 59.139 mm
 
 /gps/particle ion
-/gps/ion 56 133 0 0
-#/grdm/nucleusLimits 90 90 38 38
+/gps/time 0 us
+/gps/ion 39 90 0 0
+/grdm/nucleusLimits 90 90 39 39
 /gps/energy 0 MeV
 /gps/pos/centre 0 0 36 mm
 
 ##set number of runs
-/run/beamOn 100
+/run/beamOn 1
