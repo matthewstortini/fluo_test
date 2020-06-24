@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/stortini/software/geant4/geant4/source/persistency/gdml/schema/gdml.xsd">
+
+##########################################
+
+<!-- this geometry is meant to model the below source tungsten piece in the LANL XRF source gadget  -->
+
+##########################################
+
+ <define>
+
+  <constant name="HALFPI" value="pi/2."/>
+  <constant name="PI" value="1.*pi"/>
+  <constant name="TWOPI" value="2.*pi"/>
+
+  <position name="center" x="0" y="0" z="0"/>
+  <rotation name="identity" x="0" y="0" z="0"/>
+
+  <quantity name="whole_cylinder_height" type="length" value="17" unit="mm"/>
+  <quantity name="whole_cylinder_radius" type="length" value="35.5" unit="mm"/>
+
+  <quantity name="top_cut_height" type="length" value="10" unit="mm"/>
+  <quantity name="top_cut_radius" type="length" value="28.5" unit="mm"/>
+
+  <quantity name="au_cut_height" type="length" value="7" unit="mm"/>
+  <quantity name="au_cut_radius" type="length" value="5.313" unit="mm"/>
+
+  <quantity name="zn_cut_height" type="length" value="7" unit="mm"/>
+  <quantity name="zn_cut_radius" type="length" value="1.700" unit="mm"/>
+
+  <quantity name="zr_cut_height" type="length" value="7" unit="mm"/>
+  <quantity name="zr_cut_radius" type="length" value="1.870" unit="mm"/>
+
+  <quantity name="ag_cut_height" type="length" value="7" unit="mm"/>
+  <quantity name="ag_cut_radius" type="length" value="2.125" unit="mm"/>
+
+  <quantity name="nd_cut_height" type="length" value="7" unit="mm"/>
+  <quantity name="nd_cut_radius" type="length" value="2.380" unit="mm"/>
+
+ </define>
+
+##########################################
+
+ <materials>
+
+
+ </materials>
+
+##########################################
+
+ <solids>
+
+  <cone name="whole_cylinder" rmin1="0" rmax1="whole_cylinder_radius" rmin2="0" rmax2="whole_cylinder_radius" z="whole_cylinder_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="top_cut" rmin1="0" rmax1="top_cut_radius" rmin2="0" rmax2="top_cut_radius" z="top_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="au_cut" rmin1="0" rmax1="au_cut_radius" rmin2="0" rmax2="au_cut_radius" z="au_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="zn_cut" rmin1="0" rmax1="zn_cut_radius" rmin2="0" rmax2="zn_cut_radius" z="zn_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="zr_cut" rmin1="0" rmax1="zr_cut_radius" rmin2="0" rmax2="zr_cut_radius" z="zr_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="ag_cut" rmin1="0" rmax1="ag_cut_radius" rmin2="0" rmax2="ag_cut_radius" z="ag_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <cone name="nd_cut" rmin1="0" rmax1="nd_cut_radius" rmin2="0" rmax2="nd_cut_radius" z="nd_cut_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+  <subtraction name="cylinder_with_top_cut">
+    <first ref="whole_cylinder" />
+    <second ref="top_cut" />
+    <position x="0" y="0" z="3.5" />
+    <rotationref ref="identity" />
+  </subtraction>
+
+  <subtraction name="cylinder_with_au_cut">
+    <first ref="cylinder_with_top_cut" />
+    <second ref="au_cut" />
+    <position x="14.5" y="0" z="-5.0" />
+    <rotationref ref="identity" />
+  </subtraction>
+
+  <subtraction name="cylinder_with_zn_cut">
+    <first ref="cylinder_with_au_cut" />
+    <second ref="zn_cut" />
+    <position x="4.48" y="13.79" z="-5.0" />
+    <rotationref ref="identity" />
+  </subtraction>
+
+  <subtraction name="cylinder_with_zr_cut">
+    <first ref="cylinder_with_zn_cut" />
+    <second ref="zr_cut" />
+    <position x="-11.73" y="8.52" z="-5.0" />
+    <rotationref ref="identity" />
+  </subtraction>
+
+  <subtraction name="cylinder_with_ag_cut">
+    <first ref="cylinder_with_zr_cut" />
+    <second ref="ag_cut" />
+    <position x="-11.73" y="-8.52" z="-5.0" />
+    <rotationref ref="identity" />
+  </subtraction>
+  
+  <subtraction name="tungsten_piece">
+    <first ref="cylinder_with_ag_cut" />
+    <second ref="nd_cut" />
+    <position x="4.48" y="-13.79" z="-5.0" />
+    <rotationref ref="identity" />
+  </subtraction>
+
+ </solids>
+
+##########################################
+
+ <structure>
+
+ <volume name="Tungsten_Piece">
+   <materialref ref="G4_W"/>
+   <solidref ref="tungsten_piece"/>
+  </volume>
+
+ </structure>
+
+##########################################
+
+ <setup name="Default" version="1.0">
+  <world ref="Tungsten_Piece"/>
+ </setup>
+</gdml>

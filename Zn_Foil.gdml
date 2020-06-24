@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/stortini/software/geant4/geant4/source/persistency/gdml/schema/gdml.xsd">
+
+##########################################
+
+<!-- this foil is meant to model a foil used in LANL's x-ray fluorescence geometry -->
+
+##########################################
+
+ <define>
+
+  <constant name="HALFPI" value="pi/2."/>
+  <constant name="PI" value="1.*pi"/>
+  <constant name="TWOPI" value="2.*pi"/>
+
+  <position name="center" x="0" y="0" z="0"/>
+  <rotation name="identity" x="0" y="0" z="0"/>
+
+  <quantity name="zn_foil_radius" type="length" value="7" unit="mm"/>
+  <quantity name="zn_foil_height" type="length" value="0.075" unit="mm"/>
+
+ </define>
+
+##########################################
+
+ <materials>
+
+
+ </materials>
+
+##########################################
+
+ <solids>
+
+  <cone name="zn_foil" rmin1="0" rmax1="zn_foil_radius" rmin2="0" rmax2="zn_foil_radius" z="zn_foil_height" startphi="0" deltaphi="TWOPI" aunit="rad"/>
+
+ </solids>
+
+##########################################
+
+ <structure>
+
+ <volume name="Zn_Foil">
+   <materialref ref="G4_Zn"/>
+   <solidref ref="zn_foil"/>
+  </volume>
+
+ </structure>
+
+##########################################
+
+ <setup name="Default" version="1.0">
+  <world ref="Zn_Foil"/>
+ </setup>
+</gdml>

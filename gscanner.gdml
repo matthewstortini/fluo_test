@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/Users/stortini/software/geant4/geant4/source/persistency/gdml/schema/gdml.xsd">
 
 ##########################################
 
@@ -58,10 +58,50 @@ This file is a "mother file" to insert other gdml file geometries into. This fil
      <rotationref ref="identity"/>
    </physvol>
    <physvol>
-     <file name="Gold_Foil.gdml"/>
-     <position name="Gold_Foil_Position" x="0" y="0" z="35" unit="mm"/>
+     <file name="Tungsten_Piece.gdml"/>
+     <position name="Tungsten_Piece_Position" x="0" y="0" z="42" unit="mm"/>
      <rotationref ref="identity"/>
    </physvol>
+   <physvol>
+     <file name="PP_Piece.gdml"/>
+     <position name="PP_Piece_Position" x="0" y="0" z="45.501" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Au_Foil.gdml"/>
+     <position name="Au_Foil_Position" x="14.5" y="0" z="33.374" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Zn_Foil.gdml"/>
+     <position name="Zn_Foil_Position" x="4.48" y="13.79" z="33.459" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Nb_Foil.gdml"/>
+     <position name="Nb_Foil_Position" x="-11.73" y="8.52" z="33.449" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Ag_Foil.gdml"/>
+     <position name="Ag_Foil_Position" x="-11.73" y="-8.52" z="33.459" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Nd_Foil.gdml"/>
+     <position name="Nd_Foil_Position" x="4.48" y="-13.79" z="33.419" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Titanium_Backing.gdml"/>
+     <position name="Titanium_Backing_Position" x="14.5" y="0" z="51.003" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol>
+   <physvol>
+     <file name="Copper_Top.gdml"/>
+     <position name="Copper_Top_Position" x="0" y="0" z="54.004" unit="mm"/>
+     <rotationref ref="identity"/>
+   </physvol> 
   </volume>
 
   <volume name="world">

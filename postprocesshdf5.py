@@ -87,6 +87,9 @@ def process():
 
 
 def fluo_creations_process():
+    """
+    This post-processing script tracks the initial energy of gammas as they are created in some volume.
+    """
 
     if(len(sys.argv) != 3):
         print('Usage: postprocesshdf5.py [input filename.hdf5 (with extension)] [output filename.hdf5 (with extension)]')
@@ -97,10 +100,11 @@ def fluo_creations_process():
 
     pd.options.mode.chained_assignment = None
 
+    # Import g4simple data.
     g4sfile = h5py.File(sys.argv[1], 'r')
     g4sntuple = g4sfile['default_ntuples']['g4sntuple']
 
-    ##taking data from g4sntuple and organizing it into a frame. the groups for which there is data is given by print(n).
+    # Taking data from g4sntuple and organizing it into a frame. Including KE to note the energy of particles when created.
     g4sdf = pd.DataFrame(np.array(g4sntuple['event']['pages']), columns=['event'])
     g4sdf = g4sdf.join(pd.DataFrame(np.array(g4sntuple['step']['pages']), columns=['step']),
                        lsuffix = '_caller', rsuffix = '_other')
@@ -113,9 +117,10 @@ def fluo_creations_process():
     g4sdf = g4sdf.join(pd.DataFrame(np.array(g4sntuple['KE']['pages']),
                        columns=['KE']), lsuffix = '_caller', rsuffix = '_other')
 
+    # Only keep gammas's (pid 22) first step (step 0) in the foil (volID 2) to track creations.
+    procdf = g4sdf.loc[(g4sdf.volID==2)&(g4sdf.step==0)&(g4sdf.pid==22)]
 
-    procdf = g4sdf.loc[(g4sdf.step==0)&(g4sdf.pid==22)]
-
+    # Save the pandas dataframe
     procdf.to_hdf('{}'.format(sys.argv[2]), key='procdf', mode='w')
 
     end = time.time()
